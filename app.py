@@ -1,15 +1,18 @@
 import click
 import PIL.Image
 
+from math import floor
+
 class FontsArt(object):
     def __init__(self, img_path, zoom):
         self.img_path = img_path
         self.zoom = zoom
         self.img = PIL.Image.open(self.img_path)
-        self.chars = ['%', '*', '^', '^', '-', '+', '<', '!', ':', '.', ' ']
+        self.chars = ['%', '$', '*', '^', '-', '+', '<', '!', ':', '.', ' ']
         
         width, height = self.img.size
-        self.new_width, self.new_height = 50, height / (width / 50) * zoom
+        self.new_width, self.new_height = floor(width * zoom), floor(height * zoom)
+        # self.new_width, self.new_height = 50, height / (width / 50) * zoom
         self.result = ''
 
     def resize(self):
@@ -25,14 +28,15 @@ class FontsArt(object):
         self.result = ascii_image = '\n'.join(ascii_image)
         
     def save(self):
-        with open(f"{self.img_path}.txt", "w") as f:
+        with open(f"{self.img_path[0: -4]}.txt", "w") as f:
             f.write(self.result)
 
 @click.command()
 @click.option('-P', '--path', 'path', required=True, help='Your png file path')
 @click.option('-Z', '--zoom', 'zoom', required=False, help='zoom feature')
-def main(path: str, zoom: str | float = 1.0): # zoom should be translate to float
+def main(path: str, zoom: str | float | None = 1.0): # zoom should be translate to float
     try:
+        if not zoom: zoom = 1.0
         zoom = float(zoom)
     except:
         print('[ERROR:] --zoom options should be float type')

@@ -2,7 +2,7 @@
 
 ## use PIL to translate png file to txt.
 
-
+use `python app.py --help` to get command usage
 
 ```txt
 %%%%%%%%%%*^^^^^^^^^^^^ %%*^^^*%%%%%%%%%%%%%%%%%%%
