@@ -29,9 +29,9 @@ class FontsArt(object):
             f.write(self.result)
 
 @click.command()
-@click.option('-P', '--path', 'path', required=True)
-@click.option('--zoom', 'zoom', required=False)
-def main(path: str, zoom: str = 1.0): # zoom should be translate to float
+@click.option('-P', '--path', 'path', required=True, help='Your png file path')
+@click.option('-Z', '--zoom', 'zoom', required=False, help='zoom feature')
+def main(path: str, zoom: str | float = 1.0): # zoom should be translate to float
     try:
         zoom = float(zoom)
     except:
