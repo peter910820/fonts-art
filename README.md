@@ -1,9 +1,19 @@
-# fonts-art
+# fonts-art ~ A use PIL to translate png file to txt.
 
-## use PIL to translate png file to txt.
+[![Static Badge](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/release/python-3100/)
+[![Static Badge](https://img.shields.io/badge/pillow-11.0.0%2B-green)](https://pillow.readthedocs.io/en/stable/)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/peter910820/fonts-art/blob/main/LICENSE) 
 
-use `python app.py --help` to get command usage
+## ⚙️ How to use  
 
+```bash
+$ git clone https://github.com/peter910820/fonts-art.git
+$ pip install -r requirements.txt
+$ cd ./fonts-art
+$ python app.py --help
+```  
+
+## ⭐ Achievements  
 ```txt
 %%%%%%%%%%*^^^^^^^^^^^^ %%*^^^*%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%^^-----^^^^^*%%^-----^%%%%%%%%%%%%%%%%%
