@@ -11,7 +11,7 @@ class FontsArt(object):
         self.chars = ['%', '$', '*', '^', '-', '+', '<', '!', ':', '.', ' ']
         
         width, height = self.img.size
-        self.new_width, self.new_height = floor(width * zoom), floor(height * zoom)
+        self.new_width, self.new_height = floor(width * zoom), floor(height * zoom)*0.5
         # self.new_width, self.new_height = 50, height / (width / 50) * zoom
         self.result = ''
 
@@ -19,8 +19,10 @@ class FontsArt(object):
         self.img = self.img.resize((self.new_width, int(self.new_height)))
         self.img = self.img.convert('L') # translate to Grayscale
 
-    def translate(self):
+    def translate(self, reverse):
         pixels = self.img.getdata()
+        if reverse:
+            self.chars.reverse()
         new_pixels = [self.chars[pixel//25] for pixel in pixels]
         new_pixels = ''.join(new_pixels)
         ascii_image = [new_pixels[index: index + self.new_width] 
@@ -33,17 +35,19 @@ class FontsArt(object):
 
 @click.command()
 @click.option('-P', '--path', 'path', required=True, help='Your png file path')
-@click.option('-Z', '--zoom', 'zoom', required=False, help='zoom feature')
-def main(path: str, zoom: str | float | None = 1.0): # zoom should be translate to float
+@click.option('-Z', '--zoom', 'zoom', default=1.0, required=False, help='zoom feature')
+@click.option('-R', '--reverse', 'reverse', default=False, required=False, help='reverse feature')
+def main(path: str, zoom: str | float | None, reverse: bool): # zoom should be translate to float
     try:
         if not zoom: zoom = 1.0
         zoom = float(zoom)
     except:
         print('[ERROR:] --zoom options should be float type')
         return
+    
     image = FontsArt(path, zoom)
     image.resize()
-    image.translate()
+    image.translate(reverse)
     image.save()
 
 if __name__== '__main__':
